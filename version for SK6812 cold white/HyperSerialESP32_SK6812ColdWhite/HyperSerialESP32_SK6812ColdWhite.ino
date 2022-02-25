@@ -5,7 +5,7 @@
 
 #define   THIS_IS_RGBW             // RGBW SK6812, otherwise comment it
 bool      skipFirstLed = false;    // if set the first led in the strip will be set to black (for level shifters)
-int       serialSpeed = 2000000;   // serial port speed
+const unsigned long       serialSpeed = 2000000;   // serial port speed
 #define   DATA_PIN   2             // PIN: data output for LED strip
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
