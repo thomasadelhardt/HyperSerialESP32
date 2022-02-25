@@ -5,6 +5,7 @@
 
 #define   THIS_IS_RGBW             // RGBW SK6812, otherwise comment it
 bool      skipFirstLed = false;    // if set the first led in the strip will be set to black (for level shifters)
+#define   SKIP_FIRST_LED    // if set the first led in the strip will be set to black (for level shifters)
 const unsigned long       serialSpeed = 2000000;   // serial port speed
 #define   DATA_PIN   2             // PIN: data output for LED strip
 
@@ -201,8 +202,8 @@ void readSerialData()
                     
             fletcher1 = (fletcher1 + (uint16_t)input) % 255;
             fletcher2 = (fletcher2 + fletcher1) % 255;
-
-            if (currentPixel == 0 && skipFirstLed)
+            #ifdef SKIP_FIRST_LED
+            if (currentPixel == 0)
             {
                 #ifdef THIS_IS_RGBW
                 strip->SetPixelColor(currentPixel++, RgbwColor(0, 0, 0, 0));
@@ -211,8 +212,9 @@ void readSerialData()
                 #endif
             }
             else
+            #else
                 setStripPixel(currentPixel++, inputColor);
-
+            #endif
             if (count-- > 0) state = AwaProtocol::RED;
             else state = AwaProtocol::FLETCHER1;
             break;
@@ -266,11 +268,11 @@ void setup()
     #else
       Serial.write("Color mode: RGB\r\n");
     #endif
-    if (skipFirstLed)
+    #ifdef SKIP_FIRST_LED
       Serial.write("First LED: disabled\r\n");
-    else
+    #else
       Serial.write("First LED: enabled\r\n");
-
+    #endif
     // Prepare calibration for RGBW
     #ifdef THIS_IS_RGBW
         // prepare LUT calibration table, cold white is much better than "neutral" white
