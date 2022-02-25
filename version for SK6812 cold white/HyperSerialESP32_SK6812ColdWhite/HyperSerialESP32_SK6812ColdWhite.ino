@@ -88,7 +88,7 @@ inline void ShowMe()
 
 void readSerialData()
 {
-    unsigned long curTime = millis();
+    const unsigned long curTime = millis();
     uint16_t bufferPointer = 0;
     uint16_t internalIndex = min(Serial.available(), MAX_BUFFER);
 
