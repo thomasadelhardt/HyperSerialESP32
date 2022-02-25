@@ -3,11 +3,10 @@
 /////////////////////////          CONFIG SECTION STARTS               /////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define   THIS_IS_RGBW             // RGBW SK6812, otherwise comment it
-bool      skipFirstLed = false;    // if set the first led in the strip will be set to black (for level shifters)
-#define   SKIP_FIRST_LED    // if set the first led in the strip will be set to black (for level shifters)
-const unsigned long       serialSpeed = 2000000;   // serial port speed
-#define   DATA_PIN   2             // PIN: data output for LED strip
+#define   THIS_IS_RGBW                    // RGBW SK6812, otherwise comment it
+#define   SKIP_FIRST_LED                  // if set the first led in the strip will be set to black (for level shifters)
+#define   DATA_PIN   2                    // PIN: data output for LED strip
+const unsigned int serialSpeed = 2000000; // serial port speed
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////            CONFIG SECTION ENDS               /////////////////////////////
